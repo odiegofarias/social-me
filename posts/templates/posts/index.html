@@ -10,5 +10,14 @@
 <body>
     <h2>Quantidade de perfis: {{ qtd_perfis }}</h2>
     <h2>Quantidade de posts: {{ qtd_posts }}</h2>
+    {% for post in posts %}
+        <h2>Posts: {{ post.conteudo }}</h2>
+    {% endfor %}
+
+    {% for perfil in perfis %}
+        <h2>Escolha um usuário: {{ perfil.usuario.username }}</h2>
+    {% endfor %}
+    {{ form.as_p }}
+
 </body>
 </html>
