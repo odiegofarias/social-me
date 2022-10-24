@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Perfil(models.Model):
@@ -17,6 +19,16 @@ class Perfil(models.Model):
 
     class Meta:
         verbose_name_plural = 'perfis'
+
+
+@receiver(post_save, sender=User)
+def cria_perfil(sender, instance, created, **kwargs):
+    if created:
+        perfil_usuario = Perfil(usuario=instance)
+        perfil_usuario.save()
+
+        perfil_usuario.seguidores.add(instance.perfil)
+        perfil_usuario.save()
 
 
 class Post(models.Model):
