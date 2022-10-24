@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Perfil, Post
 from .forms import PostForm
 
@@ -6,11 +6,22 @@ from .forms import PostForm
 def index(request):
     template = 'posts/index.html'
 
-    form = PostForm()
+    
     qtd_posts = Post.objects.count()
     qtd_perfis = Perfil.objects.count()
     posts = Post.objects.all()
     perfis = Perfil.objects.all()
+
+    form = PostForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            mensagem = form.save(commit=False)
+            mensagem.autor = request.user
+            mensagem.save()
+
+            return redirect("posts:index")
+
+    
 
     context = {
         'qtd_posts': qtd_posts,

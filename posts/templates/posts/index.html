@@ -10,14 +10,20 @@
 <body>
     <h2>Quantidade de perfis: {{ qtd_perfis }}</h2>
     <h2>Quantidade de posts: {{ qtd_posts }}</h2>
+    <h2>Posts:
     {% for post in posts %}
-        <h2>Posts: {{ post.conteudo }}</h2>
+        <p>{{ post.autor }} - {{ post.conteudo }}</p>
     {% endfor %}
 
+    <h2>Escolha um usuário:
     {% for perfil in perfis %}
-        <h2>Escolha um usuário: {{ perfil.usuario.username }}</h2>
+         <p>{{ perfil.usuario.username }}</p>
     {% endfor %}
-    {{ form.as_p }}
+    <form action="{% url 'posts:index' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Enviar</button>
+    </form>
 
 </body>
 </html>

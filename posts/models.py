@@ -43,6 +43,7 @@ class Post(models.Model):
 
     class Meta:
         verbose_name_plural = "posts"
+        ordering = ['-data_criacao']
 
 
     def __str__(self) -> str:
