@@ -1,6 +1,8 @@
+from django.http import Http404
+from django.urls import reverse
 from django.shortcuts import redirect, render
 from .models import Perfil, Post
-from .forms import PostForm
+from .forms import PostForm, RegisterForm
 
 
 def index(request):
@@ -32,4 +34,26 @@ def index(request):
     }
 
     return render(request, template, context)
+
+
+def registro(request):
+    template = 'posts/registro.html'
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:index')
+
+    form = RegisterForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
+
+
+
+
 
