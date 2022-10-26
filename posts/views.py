@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 from .models import Perfil, Post
 from .forms import PostForm, RegisterForm
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
@@ -42,7 +43,10 @@ def registro(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
+
             return redirect('posts:index')
 
     form = RegisterForm()
@@ -53,6 +57,9 @@ def registro(request):
 
     return render(request, template, context)
 
+
+def login(request):
+    ...
 
 
 

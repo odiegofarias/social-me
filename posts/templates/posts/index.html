@@ -12,7 +12,7 @@
 
     <h2>Escolha um usuário:
     {% for perfil in perfis %}
-         <p>{{ perfil.usuario.username }}</p>
+         {{ perfil.usuario.username }}, 
     {% endfor %}
     <form action="{% url 'posts:index' %}" method="POST">
         {% csrf_token %}
