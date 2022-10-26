@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from .models import Perfil, Post
 from .forms import LoginForm, PostForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 def index(request):
@@ -60,9 +61,22 @@ def registro(request):
 
 def login(request):
     template = 'posts/login.html'
-
     form = LoginForm()
+    
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
 
+            if user is not None:
+                login(request, user)
+
+                return redirect('posts:index')
+
+    
+    
     return render(request, template, {'form': form})
 
 
