@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from .models import Perfil, Post
@@ -62,20 +62,19 @@ def registro(request):
 def login(request):
     template = 'posts/login.html'
     form = LoginForm()
-    
+
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
             if user is not None:
                 login(request, user)
-
                 return redirect('posts:index')
-
-    
+            else:
+                return HttpResponse('Deu RUIM')
     
     return render(request, template, {'form': form})
 
