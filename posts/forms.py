@@ -74,3 +74,31 @@ class RegisterForm(forms.ModelForm):
         )
     )
 
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+    
+    username = forms.CharField(
+        label='Usuário',
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Digite seu nome de usuário',
+                'class': 'form-control mt-1',
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label='Senha',
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Digite sua senha',
+                'class': 'form-control mt-1',
+            }
+        )
+    )
+

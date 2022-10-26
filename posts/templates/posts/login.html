@@ -1,0 +1,14 @@
+{% extends 'global/base.html' %}
+
+{% block conteudo %}
+
+    <form action="{% url 'posts:login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Entrar</button>
+    </form>
+
+{% endblock conteudo %}
+
+
+

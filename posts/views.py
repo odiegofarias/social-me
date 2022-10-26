@@ -2,7 +2,7 @@ from django.http import Http404
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from .models import Perfil, Post
-from .forms import PostForm, RegisterForm
+from .forms import LoginForm, PostForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -59,7 +59,12 @@ def registro(request):
 
 
 def login(request):
-    ...
+    template = 'posts/login.html'
+
+    form = LoginForm()
+
+    return render(request, template, {'form': form})
+
 
 
 
