@@ -2,7 +2,9 @@
 
 {% block conteudo %}
     
-
+    {% if user.is_authenticated %}
+        <h1>Bem vindo, {{ user }}</h1>
+    {% endif %}
     <h2>Quantidade de perfis: {{ qtd_perfis }}</h2>
     <h2>Quantidade de posts: {{ qtd_posts }}</h2>
     <h2>Posts:

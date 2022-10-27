@@ -59,22 +59,28 @@ def registro(request):
     return render(request, template, context)
 
 
-def login(request):
+def logar(request):
     template = 'posts/login.html'
-    form = LoginForm()
 
     if request.method == "POST":
         form = LoginForm(request.POST)
+
         if form.is_valid():
             user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
+                username = form.cleaned_data.get('username', ''),
+                password = form.cleaned_data.get('password', ''),    
             )
+
             if user is not None:
+                messages.success(request, 'Você logou!')
                 login(request, user)
                 return redirect('posts:index')
             else:
-                return HttpResponse('Deu RUIM')
+                messages.error(request, 'Credenciais inválidas')
+        else:
+            messages.error(request, 'Usuário ou senha incorreto')
+
+    form = LoginForm()
     
     return render(request, template, {'form': form})
 

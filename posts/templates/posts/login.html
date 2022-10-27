@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 
-    <form action="{% url 'posts:login' %}" method="POST">
+    <form action="{% url 'posts:logar' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Entrar</button>
