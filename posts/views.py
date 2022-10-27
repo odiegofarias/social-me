@@ -81,8 +81,13 @@ def logar(request):
             messages.error(request, 'Usuário ou senha incorreto')
 
     form = LoginForm()
-    
+
     return render(request, template, {'form': form})
+
+
+def logout_usuario(request):
+    logout(request)
+    return redirect('posts:index')
 
 
 
