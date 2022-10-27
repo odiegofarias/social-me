@@ -1,0 +1,11 @@
+{% extends 'global/base.html' %}
+
+
+{% block conteudo %}
+
+    {% for perfil in perfis %}
+        <p>{{ perfil.usuario.username }}</p>
+        <p>@{{ perfil.usuario.username }}</p>
+    {% endfor %}
+
+{% endblock conteudo %}

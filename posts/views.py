@@ -90,6 +90,13 @@ def logout_usuario(request):
     return redirect('posts:index')
 
 
+def lista_perfis(request):
+    template = 'posts/perfis.html'
+
+    perfis = Perfil.objects.exclude(usuario=request.user)
+    return render(request, template, {'perfis': perfis})
+
+
 
 
 
