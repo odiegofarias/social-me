@@ -97,6 +97,13 @@ def lista_perfis(request):
     return render(request, template, {'perfis': perfis})
 
 
+def perfil(request, pk):
+    template = 'posts/perfil.html'
+
+    perfil = Perfil.objects.get(pk=pk)
+
+    return render(request, template, {'perfil': perfil})
+
 
 
 
