@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Perfil do {{ perfil.usuario.username }}</h1>
-                {% if user.username != user.perfil %}
+                <h1>Perfil de {{ perfil.usuario.username }}</h1>
+                {% if user != perfil.usuario %}
                     <form method="POST">
                         {% csrf_token %}
                         {% if perfil in user.perfil.seguidores.all %}
@@ -16,9 +16,7 @@
                             <button class="btn btn-success" name="seguir" value="seguir">Seguir</button>
                             <button class="btn btn-danger disabled">Deixar de seguir</button>
                         {% endif %}    
-                    </form>
-                {% else %}
-                    
+                    </form>   
                 {% endif %}
                 <br><br>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
