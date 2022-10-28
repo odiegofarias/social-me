@@ -25,7 +25,7 @@
                     <div class="navbar-nav">
                         {% if user.is_authenticated %}
                             <a href="{% url 'posts:logout' %}" class="nav-item nav-link" id="services-menu">Logout</a>
-                            <a href="#" class="nav-item nav-link" id="team-menu">Meus Posts</a>
+                            <a href="{% url 'posts:meus_posts' %}" class="nav-item nav-link" id="team-menu">Meus Posts</a>
                             <a href="{% url 'posts:lista_perfis' %}" class="nav-item nav-link" id="team-menu">Lista de perfis</a>
                         {% else %}
                             <a href="{% url 'posts:logar' %}" class="nav-item nav-link" id="home-menu">Login</a>

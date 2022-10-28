@@ -1,0 +1,11 @@
+{% extends 'global/base.html' %}
+
+
+{% block conteudo %}
+
+    {% for post in posts %}
+        <h3>@{{ post.autor|lower }} disse:</h3>
+        <p>{{ post.conteudo }}</p>
+    {% endfor %}
+
+{% endblock conteudo %}

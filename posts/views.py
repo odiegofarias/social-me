@@ -105,5 +105,14 @@ def perfil(request, pk):
     return render(request, template, {'perfil': perfil})
 
 
+def meus_posts(request):
+    template = 'posts/meus_posts.html'
+
+    posts = Post.objects.filter(autor=request.user)
+
+    return render(request, template, {'posts': posts})
+
+
+
 
 
