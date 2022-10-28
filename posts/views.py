@@ -119,10 +119,13 @@ def perfil(request, pk):
 
         perfil_atual.save()
 
+        return redirect('posts:perfil', pk=pk)
+
     context = {
         'perfil': perfil,
         'meus_posts': meus_posts,
     }
+
     return render(request, template, context)
 
 

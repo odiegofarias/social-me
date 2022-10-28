@@ -3,34 +3,74 @@
 
 {% block conteudo %}
     <div class="container">
-        <h1>Perfil do {{ perfil.usuario.username }}</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {% if perfil in user.perfil.seguidores.all %}
-                <button class="btn btn-success disabled">Seguir</button>
-                <button class="btn btn-danger" name="seguir" value="deixar-seguir">Deixar de seguir</button>
-            {% else %}   
-                <button class="btn btn-success" name="seguir" value="seguir">Seguir</button>
-                <button class="btn btn-danger disabled">Deixar de seguir</button>
-            {% endif %}
-        </form>
-        <br><br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Quae quo deleniti excepturi sed odio voluptate dolor
-            dolores. Culpa praesentium placeat tenetur 
-            obcaecati ad ducimus at iure modi aliquam. 
-            Eos, rem!</p>
-        
-        {% for post in meus_posts %}
-            <div class="card shadow p-3 mb-3 bg-body rounded">
-                <!--<img src="..." class="card-img-top" alt="...">-->
-                <div class="card-body">
-                  <h5 class="card-title">@{{ post.autor.username }}</h5>
-                  <p class="card-text">{{ post.conteudo }}</p>
-                  <p class="card-text"><small class="text-muted">Criado em: {{ post.data_criacao }}</small></p>
-                </div>
+        <div class="row">
+            <div class="col">
+                <h1>Perfil do {{ perfil.usuario.username }}</h1>
+                {% if user.username != user.perfil %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% if perfil in user.perfil.seguidores.all %}
+                            <button class="btn btn-success disabled">Seguir</button>
+                            <button class="btn btn-danger" name="seguir" value="deixar-seguir">Deixar de seguir</button>
+                        {% else %}   
+                            <button class="btn btn-success" name="seguir" value="seguir">Seguir</button>
+                            <button class="btn btn-danger disabled">Deixar de seguir</button>
+                        {% endif %}    
+                    </form>
+                {% else %}
+                    
+                {% endif %}
+                <br><br>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Quae quo deleniti excepturi sed odio voluptate dolor
+                    dolores. Culpa praesentium placeat tenetur 
+                    obcaecati ad ducimus at iure modi aliquam. 
+                    Eos, rem!
+                </p>
             </div>
-        {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-8">        
+                {% for post in meus_posts %}
+                    <div class="card shadow p-3 mb-3 bg-body rounded">
+                        <!--<img src="..." class="card-img-top" alt="...">-->
+                        <div class="card-body">
+                        <h5 class="card-title">@{{ post.autor.username }}</h5>
+                        <p class="card-text">{{ post.conteudo }}</p>
+                        <p class="card-text"><small class="text-muted">Criado em: {{ post.data_criacao }}</small></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-2 p-4">
+                <h3>Seguindo:</h3>
+                <ul>
+                    {% for seguindo in perfil.seguidores.all %}
+                        {% if seguindo == user.perfil %}
+
+                        {% else %}
+                            <a href="{% url 'posts:perfil' seguindo.id %}">
+                                <li>{{ seguindo }}</li>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-2 p-4">
+                <h3>Seguidores</h3>
+                <ul>
+                    {% for seguidor in perfil.seguido_por.all %}
+                        {% if seguidor == user.perfil %}
+
+                        {% else %}
+                            <a href="{% url 'posts:perfil' seguidor.id %}">
+                                <li>{{ seguidor }}</li>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>   
     </div>
 
 {% endblock conteudo %}
