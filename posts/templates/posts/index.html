@@ -33,7 +33,9 @@
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary mt-3">Publicar</button>
                     </div>
-                    {{ form.errors }}
+                    {% for field in form %}
+                        <p>{{ field.errors }}</p>
+                    {% endfor %}
                 </form>
                 <h2 class="margin-topo">Todos os usuários</h2>
                     {% for perfil in perfis %}
