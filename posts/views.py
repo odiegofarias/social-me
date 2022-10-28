@@ -8,11 +8,13 @@ from django.contrib import messages
 
 
 def index(request):
-    template = 'posts/index.html'
-
     posts = Post.objects.all()
 
+    return render(request, 'posts/index.html', {'posts': posts})
 
+
+def dashboard(request):
+    template = 'posts/index.html'
     form = PostForm(request.POST or None)
 
     if request.method == "POST":
@@ -22,15 +24,15 @@ def index(request):
             mensagem.save()
 
             return redirect("posts:index")
-
-    seguindo_posts = Post.objects.filter(
+    
+    posts_pessoas_que_sigo = Post.objects.filter(
         autor__perfil__in=request.user.perfil.seguidores.all()
     ).order_by('-data_criacao')
 
+
     context = {
-        'posts': posts,
         'form': form,
-        'seguindo_posts': seguindo_posts,
+        'seguindo_posts': posts_pessoas_que_sigo,
     }
 
     return render(request, template, context)

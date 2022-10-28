@@ -6,6 +6,7 @@ app_name = 'posts'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('register/', views.registro, name='registro'),
     path('login/', views.logar, name='logar'),
     path('logout/', views.logout_usuario, name='logout'),
