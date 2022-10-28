@@ -12,10 +12,10 @@ class Perfil(models.Model):
         symmetrical=False,
         blank=True,
     )
+    imagem = models.ImageField(upload_to='posts/imagens/%Y/%m/%d/', blank=True, default='')
 
     def __str__(self) -> str:
         return self.usuario.username
-
 
     class Meta:
         verbose_name_plural = 'perfis'

@@ -4,8 +4,17 @@
 {% block conteudo %}
     <div class="container">
         <h1>Perfil do {{ perfil.usuario.username }}</h1>
-        <button class="btn btn-success" name="seguir">Seguir</button>
-        <button class="btn btn-danger" name="deixar-seguir">Deixar de seguir</button>
+        <form method="POST">
+            {% csrf_token %}
+            {% if perfil in user.perfil.seguidores.all %}
+                <button class="btn btn-success disabled">Seguir</button>
+                <button class="btn btn-danger" name="seguir" value="deixar-seguir">Deixar de seguir</button>
+            {% else %}   
+                <button class="btn btn-success" name="seguir" value="seguir">Seguir</button>
+                <button class="btn btn-danger disabled">Deixar de seguir</button>
+            {% endif %}
+        </form>
+        <br><br>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             Quae quo deleniti excepturi sed odio voluptate dolor
             dolores. Culpa praesentium placeat tenetur 

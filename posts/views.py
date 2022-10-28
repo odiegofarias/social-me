@@ -100,13 +100,28 @@ def lista_perfis(request):
 
 def perfil(request, pk):
     template = 'posts/perfil.html'
+    if not hasattr(request.user, 'perfil'):
+        sem_perfil = Perfil(usuario=request.user)
+        sem_perfil.save()
 
     perfil = Perfil.objects.get(pk=pk)
     meus_posts = Post.objects.all().filter(autor=request.user)
 
+    # print(perfil)
+    if request.method == "POST":
+        perfil_atual = request.user.perfil
+        acao = request.POST.get('seguir')
+
+        if acao == 'seguir':
+            perfil_atual.seguidores.add(perfil)
+        elif acao == 'deixar-seguir':
+            perfil_atual.seguidores.remove(perfil)
+
+        perfil_atual.save()
+
     context = {
         'perfil': perfil,
-        'meus_posts': meus_posts
+        'meus_posts': meus_posts,
     }
     return render(request, template, context)
 
