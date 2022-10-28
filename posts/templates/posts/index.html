@@ -11,15 +11,14 @@
                         <h1>Bem vindo(a), {{ user.first_name|title }} {{ user.last_name|title }}</h1>
                     {% endif %}
                 {% endif %}
-                <h2>Quantidade de perfis: {{ qtd_perfis }}</h2>
-                <h2>Quantidade de posts: {{ qtd_posts }}</h2>
-                <h2>Posts:
+
                 {% for post in posts %}
-                <div class="card mt-1">
-                    <h5 class="card-header">@{{ post.autor.username }}</h5>
+                <div class="card mb-3 shadow p-1 mb-3 bg-white rounded">
+                    <!--<img src="..." class="card-img-top" alt="...">-->
                     <div class="card-body">
-                        <p class="card-text">{{ post.conteudo }}</p>
-                        <p>{{ post.data_criacao }}</p>
+                      <h5 class="card-title">@{{ post.autor.username }}</h5>
+                      <p class="card-text">{{ post.conteudo }}</p>
+                      <p class="card-text"><small class="text-muted">Criado em: {{ post.data_criacao }}</small></p>
                     </div>
                   </div>
                 {% endfor %}
