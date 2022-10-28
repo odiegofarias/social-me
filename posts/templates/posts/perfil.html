@@ -2,12 +2,15 @@
 
 
 {% block conteudo %}
-
-    <h1>Perfil do {{ perfil.usuario.username }}</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Quae quo deleniti excepturi sed odio voluptate dolor
-         dolores. Culpa praesentium placeat tenetur 
-         obcaecati ad ducimus at iure modi aliquam. 
-         Eos, rem!</p>
+    <div class="container">
+        <h1>Perfil do {{ perfil.usuario.username }}</h1>
+        <button class="btn btn-success" name="seguir">Seguir</button>
+        <button class="btn btn-danger" name="deixar-seguir">Deixar de seguir</button>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Quae quo deleniti excepturi sed odio voluptate dolor
+            dolores. Culpa praesentium placeat tenetur 
+            obcaecati ad ducimus at iure modi aliquam. 
+            Eos, rem!</p>
+    </div>
 
 {% endblock conteudo %}

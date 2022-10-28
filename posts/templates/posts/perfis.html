@@ -2,10 +2,11 @@
 
 
 {% block conteudo %}
-
-    {% for perfil in perfis %}
-        <h3><a href="{% url 'posts:perfil' perfil.id %}">{{ perfil.usuario.username }}</a></h3>
-        <p>@{{ perfil.usuario.username|lower }}</p>
-    {% endfor %}
+    <div class="container">
+        {% for perfil in perfis %}
+            <h3><a href="{% url 'posts:perfil' perfil.id %}">{{ perfil.usuario.username }}</a></h3>
+            <p>@{{ perfil.usuario.username|lower }}</p>
+        {% endfor %}
+    </div>
 
 {% endblock conteudo %}

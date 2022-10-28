@@ -66,6 +66,7 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(
         label='Senha',
         required=True,
+        max_length=140,
         widget=forms.PasswordInput(
             attrs={
                 'placeholder': 'Digite sua senha',

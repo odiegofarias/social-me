@@ -2,10 +2,11 @@
 
 
 {% block conteudo %}
-
-    {% for post in posts %}
-        <h3>@{{ post.autor|lower }} disse:</h3>
-        <p>{{ post.conteudo }}</p>
-    {% endfor %}
+    <div class="container">
+        {% for post in posts %}
+            <h3>@{{ post.autor|lower }} disse:</h3>
+            <p>{{ post.conteudo }}</p>
+        {% endfor %}
+    </div>
 
 {% endblock conteudo %}
