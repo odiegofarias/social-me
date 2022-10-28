@@ -14,7 +14,7 @@ def index(request):
 
 
 def dashboard(request):
-    template = 'posts/index.html'
+    template = 'posts/dashboard.html'
     form = PostForm(request.POST or None)
 
     if request.method == "POST":
@@ -27,7 +27,7 @@ def dashboard(request):
     
     posts_pessoas_que_sigo = Post.objects.filter(
         autor__perfil__in=request.user.perfil.seguidores.all()
-    ).order_by('-data_criacao')
+    ).exclude(autor=request.user).order_by('-data_criacao')
 
 
     context = {
