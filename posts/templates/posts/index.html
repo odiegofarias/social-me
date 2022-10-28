@@ -13,7 +13,7 @@
                 {% endif %}
 
                 {% for post in posts %}
-                <div class="card mb-3 shadow p-1 mb-3 bg-white rounded">
+                <div class="card shadow p-3 mb-3 bg-body rounded">
                     <!--<img src="..." class="card-img-top" alt="...">-->
                     <div class="card-body">
                       <h5 class="card-title">@{{ post.autor.username }}</h5>
@@ -25,12 +25,15 @@
 
    
             </div>
+            
             <div class="col-4">
                 <form action="{% url 'posts:index' %}" method="POST">
                     {% csrf_token %}
                     {{ form.conteudo }}
-                    <br>
-                    <button type="submit" class="btn btn-success">Enviar</button>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary mt-3">Publicar</button>
+                    </div>
+                    {{ form.errors }}
                 </form>
                 <h2>Todos os usuários</h2>
                     {% for perfil in perfis %}

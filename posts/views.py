@@ -16,7 +16,8 @@ def index(request):
     posts = Post.objects.all()
     perfis = Perfil.objects.all()
 
-    form = PostForm(request.POST)
+    form = PostForm(request.POST or None)
+    
     if request.method == "POST":
         if form.is_valid():
             mensagem = form.save(commit=False)

@@ -32,7 +32,7 @@ def cria_perfil(sender, instance, created, **kwargs):
 
 
 class Post(models.Model):
-    conteudo = models.CharField(max_length=200)
+    conteudo = models.CharField(max_length=140)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
     autor = models.ForeignKey(

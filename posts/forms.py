@@ -1,3 +1,5 @@
+from ctypes import resize
+import re
 from django import forms
 from .models import Post
 from django.contrib.auth.models import User
@@ -9,9 +11,10 @@ class PostForm(forms.ModelForm):
         widget=forms.widgets.Textarea(
             attrs={
                 'placeholder': 'No que está pensando...',
-                'class': 'form-control',
+                'class': 'form-control margin-topo',
             }
-        )
+        ),
+        label='',
     )
 
     class Meta:
@@ -66,7 +69,6 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(
         label='Senha',
         required=True,
-        max_length=140,
         widget=forms.PasswordInput(
             attrs={
                 'placeholder': 'Digite sua senha',
