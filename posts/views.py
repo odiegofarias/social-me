@@ -10,11 +10,8 @@ from django.contrib import messages
 def index(request):
     template = 'posts/index.html'
 
-    
-    qtd_posts = Post.objects.count()
-    qtd_perfis = Perfil.objects.count()
     posts = Post.objects.all()
-    perfis = Perfil.objects.all()
+
 
     form = PostForm(request.POST or None)
 
@@ -26,14 +23,14 @@ def index(request):
 
             return redirect("posts:index")
 
-    
+    seguindo_posts = Post.objects.filter(
+        autor__perfil__in=request.user.perfil.seguidores.all()
+    ).order_by('-data_criacao')
 
     context = {
-        'qtd_posts': qtd_posts,
-        'qtd_perfis': qtd_perfis,
         'posts': posts,
-        'perfis': perfis,
         'form': form,
+        'seguindo_posts': seguindo_posts,
     }
 
     return render(request, template, context)
