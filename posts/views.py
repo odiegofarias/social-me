@@ -17,7 +17,7 @@ def index(request):
     perfis = Perfil.objects.all()
 
     form = PostForm(request.POST or None)
-    
+
     if request.method == "POST":
         if form.is_valid():
             mensagem = form.save(commit=False)
@@ -102,8 +102,13 @@ def perfil(request, pk):
     template = 'posts/perfil.html'
 
     perfil = Perfil.objects.get(pk=pk)
+    meus_posts = Post.objects.all().filter(autor=request.user)
 
-    return render(request, template, {'perfil': perfil})
+    context = {
+        'perfil': perfil,
+        'meus_posts': meus_posts
+    }
+    return render(request, template, context)
 
 
 def meus_posts(request):
