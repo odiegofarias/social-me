@@ -3,7 +3,11 @@
 {% block conteudo %}
     
     {% if user.is_authenticated %}
-        <h1>Bem vindo, {{ user }}</h1>
+        {% if not user.first_name %}
+            <h1>Bem vindo(a), {{ user.username }}</h1>
+        {% else %}
+            <h1>Bem vindo(a), {{ user.first_name|title }} {{ user.last_name|title }}</h1>
+        {% endif %}
     {% endif %}
     <h2>Quantidade de perfis: {{ qtd_perfis }}</h2>
     <h2>Quantidade de posts: {{ qtd_posts }}</h2>
@@ -14,7 +18,7 @@
 
     <h2>Escolha um usuário:
     {% for perfil in perfis %}
-         {{ perfil.usuario.username }}, 
+         @{{ perfil.usuario.username }}, 
     {% endfor %}
     <form action="{% url 'posts:index' %}" method="POST">
         {% csrf_token %}
