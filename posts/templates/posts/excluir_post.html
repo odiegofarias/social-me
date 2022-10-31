@@ -1,0 +1,18 @@
+{% extends 'global/base.html' %}
+
+
+{% block conteudo %}
+
+    <div class="container">
+        <form action="" method='POST'>
+            {% csrf_token %}
+            <p>Certeza de que deseja excluir o post?</p>
+            <a href="{% url 'posts:perfil' user.id %}" class="btn btn-primary">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Confirmar</button>
+        </form>
+    </div>
+
+{% endblock conteudo %}
+
+
+

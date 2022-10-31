@@ -155,9 +155,17 @@ def editar_post(request, pk):
 
 
 
-def excluir_post(request):
-    ...
+def excluir_post(request, pk):
+    template = 'posts/excluir_post.html'
+    post = Post.objects.get(pk=pk)
 
+    if request.method == "POST":
+        post.delete()
+        return redirect('posts:perfil', pk=request.user.id)
+
+    context = {'post': post}
+
+    return render(request, template, context)
 
 
 
