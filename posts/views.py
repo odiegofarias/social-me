@@ -136,6 +136,29 @@ def meus_posts(request):
     return render(request, template, {'posts': posts})
 
 
+def editar_post(request, pk):
+    template = 'posts/editar_post.html'
+    post = Post.objects.get(pk=pk)
+    form = PostForm(instance=post)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:perfil', pk=request.user.id)
+    
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)
+
+
+
+def excluir_post(request):
+    ...
+
+
 
 
 

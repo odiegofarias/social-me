@@ -28,7 +28,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-8">        
+            <div class="col-8"> 
+                <h3 class="text text-center p-2">Minhas postagens</h3>     
                 {% for post in meus_posts %}
                     <div class="card shadow p-3 mb-3 bg-body rounded">
                         <!--<img src="..." class="card-img-top" alt="...">-->
@@ -36,6 +37,8 @@
                         <h5 class="card-title">@{{ post.autor.username }}</h5>
                         <p class="card-text">{{ post.conteudo }}</p>
                         <p class="card-text"><small class="text-muted">Criado em: {{ post.data_criacao }}</small></p>
+                        <a href="{% url 'posts:editar' post.id %}" class="btn btn-warning mt-4">Editar</a>
+                        <a href="{% url 'posts:excluir' post.id %}" class="btn btn-danger mt-4">Excluir</a>
                         </div>
                     </div>
                 {% endfor %}

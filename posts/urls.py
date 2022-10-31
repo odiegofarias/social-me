@@ -13,4 +13,6 @@ urlpatterns = [
     path('perfis/', views.lista_perfis, name='lista_perfis'),
     path('perfil/<int:pk>/', views.perfil, name='perfil'),
     path('meus-posts/', views.meus_posts, name='meus_posts'),
+    path('editar/<int:pk>/', views.editar_post, name="editar"),
+    path('excluir/<int:pk>/', views.excluir_post, name='excluir'),
 ]
