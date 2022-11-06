@@ -15,4 +15,5 @@ urlpatterns = [
     path('meus-posts/', views.meus_posts, name='meus_posts'),
     path('editar/<int:pk>/', views.editar_post, name="editar"),
     path('excluir/<int:pk>/', views.excluir_post, name='excluir'),
+    path('troca-senha/', views.troca_senha, name='troca_senha'),
 ]

@@ -5,7 +5,8 @@
         <form action="{% url 'posts:logar' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-success">Entrar</button>
+            <a href="{% url 'posts:troca_senha' %}">Esqueceu sua senha?</a><br>
+            <button type="submit" class="btn btn-success mt-3">Entrar</button>
         </form>
     </div>
 

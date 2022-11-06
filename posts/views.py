@@ -2,9 +2,10 @@ from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from .models import Perfil, Post
-from .forms import LoginForm, PostForm, RegisterForm
+from .forms import LoginForm, PostForm, RegisterForm, NovaSenhaForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -166,6 +167,24 @@ def excluir_post(request, pk):
     context = {'post': post}
 
     return render(request, template, context)
+
+
+@login_required(login_url='posts:logar', redirect_field_name='next')
+def troca_senha(request):
+    template = 'posts/reset_password.html'
+    user = request.user
+
+    if request.method == "POST":
+        form = NovaSenhaForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Senha trocada com sucesso")
+            
+            return redirect('posts:logar')
+    
+    form = NovaSenhaForm(user)
+
+    return render(request, template, {'form': form})
 
 
 
