@@ -16,4 +16,5 @@ urlpatterns = [
     path('editar/<int:pk>/', views.editar_post, name="editar"),
     path('excluir/<int:pk>/', views.excluir_post, name='excluir'),
     path('troca-senha/', views.troca_senha, name='troca_senha'),
+    path('likes/<int:post_id>', views.like, name='like'),
 ]

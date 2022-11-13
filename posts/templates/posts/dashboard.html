@@ -21,6 +21,9 @@
                             <h5 class="card-title">@{{ post.autor.username }}</h5>
                             <p class="card-text">{{ post.conteudo }}</p>
                             <p class="card-text"><small class="text-muted">Criado em: {{ post.data_criacao }}</small></p>
+                            <a href="{% url 'posts:like' post.id %}" class="btn btn-primary mb-2">Like</a>
+                            <p class="card-text">{{ post.likes }} likes</p>
+
                         </div>
                     </div>
                 {% endfor %}

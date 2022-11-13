@@ -40,6 +40,7 @@ class Post(models.Model):
         related_name="posts",
         on_delete=models.DO_NOTHING,
     )
+    likes = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = "posts"
@@ -48,7 +49,12 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return (
+            f"ID: {self.id}, "
             f"{self.autor} "
             f"({self.data_criacao: %d/%m/%Y %H:%M}).  "
             f"{self.conteudo[:30]}..."
         )
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_likes')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_likes')
