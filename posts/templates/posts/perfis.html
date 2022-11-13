@@ -4,8 +4,14 @@
 {% block conteudo %}
     <div class="container">
         {% for perfil in perfis %}
-            <h3><a href="{% url 'posts:perfil' perfil.id %}">{{ perfil.usuario.username }}</a></h3>
-            <p>@{{ perfil.usuario.username|lower }}</p>
+            {% if perfil.imagem %}
+                <img src="{{ perfil.imagem.url }}" class="rounded-circle" alt="" style="width: 100px; heigth: 100px;">
+                <h3><a href="{% url 'posts:perfil' perfil.id %}">{{ perfil.usuario.username }}</a></h3>
+                <p>@{{ perfil.usuario.username|lower }}</p>
+            {% else %}
+                <h3><a href="{% url 'posts:perfil' perfil.id %}">{{ perfil.usuario.username }}</a></h3>
+                <p>@{{ perfil.usuario.username|lower }}</p>
+            {% endif %}
         {% endfor %}
     </div>
 

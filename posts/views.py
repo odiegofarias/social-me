@@ -17,6 +17,7 @@ def index(request):
 def dashboard(request):
     template = 'posts/dashboard.html'
     form = PostForm(request.POST or None)
+    perfis = Perfil.objects.all()
 
     if request.method == "POST":
         if form.is_valid():
@@ -24,7 +25,7 @@ def dashboard(request):
             mensagem.autor = request.user
             mensagem.save()
 
-            return redirect("posts:index")
+            return redirect("posts:dashboard")
     
     posts_pessoas_que_sigo = Post.objects.filter(
         autor__perfil__in=request.user.perfil.seguidores.all()
@@ -34,6 +35,7 @@ def dashboard(request):
     context = {
         'form': form,
         'seguindo_posts': posts_pessoas_que_sigo,
+        'perfis': perfis,
     }
 
     return render(request, template, context)
