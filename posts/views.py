@@ -193,7 +193,7 @@ def like(request, post_id):
     user = request.user
     post = Post.objects.get(id=post_id)
     current_likes = post.likes
-    liked =Likes.objects.filter(user=user, post=post).count()
+    liked = Likes.objects.filter(user=user, post=post).count()
     if not liked:
         liked = Likes.objects.create(user=user, post=post)
         current_likes += 1
@@ -205,4 +205,18 @@ def like(request, post_id):
     post.save()
 
     return redirect('posts:dashboard')
+
+
+def favorita(request, post_id):
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    perfil = Perfil.objects.get(usuario=user)
+
+    if perfil.favorita.filter(id=post_id).exists():
+        perfil.favorita.remove(post)
+    else:
+        perfil.favorita.add(post)
+
+    return redirect('posts:dashboard')
+
 

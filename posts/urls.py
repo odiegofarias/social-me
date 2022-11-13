@@ -17,4 +17,5 @@ urlpatterns = [
     path('excluir/<int:pk>/', views.excluir_post, name='excluir'),
     path('troca-senha/', views.troca_senha, name='troca_senha'),
     path('likes/<int:post_id>', views.like, name='like'),
+    path('favorita/<int:post_id>', views.favorita, name='favorita'),
 ]
